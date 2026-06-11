@@ -150,6 +150,10 @@ nav{
     margin-top: 32px;
 }
 
+.LinkToLogin{
+    width: 100%;
+}
+
 .button-role.mahasiswa button{
     all: unset;
     width: 100%;
@@ -195,6 +199,36 @@ nav{
 
 .content-extra-support.last{
     color: #003FB1;
+}
+
+.container-footer{
+    width: 100%;
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #FFFFFF;
+    align-items: center;    
+    border-top: 1px solid #C3C5D7;
+}
+
+.content-footer{
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    align-items: center;
+}
+
+.text-footer{
+    display: flex;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: #5C5F60;
+}
+
+.text-footer.edit{
+    color: black;
+
 }
 
 
