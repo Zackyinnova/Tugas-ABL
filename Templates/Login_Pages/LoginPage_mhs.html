@@ -165,20 +165,22 @@
 
                         <!-- NIM Field -->
                         <div class="space-y-xs">
-                        <label class="block text-label-md font-label-md text-on-surface-variant" for="nim">NIM (Nomor Induk Mahasiswa)</label>
-                        <div class="relative group">
-                        <span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">person</span>
-                        <input class="w-full pl-[48px] pr-md py-md bg-transparent border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all text-body-md font-body-md placeholder:text-secondary/50" id="nim" name="nim" placeholder="Masukkan NIM Anda" required="" type="text"/>
-                        </div>
+                            <label class="block text-label-md font-label-md text-on-surface-variant" for="nim">NIM (Nomor Induk Mahasiswa)</label>
+                        
+                            <div class="relative group">
+                                <span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">person</span>
+                                <input class="w-full pl-[48px] pr-md py-md bg-transparent border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all text-body-md font-body-md placeholder:text-secondary/50" id="nim" name="nim" placeholder="Masukkan NIM Anda" required="" type="text"/>
+                            </div>
                         </div>
 
                         <!-- Password Field -->
                         <div class="space-y-xs">
-                        <label class="block text-label-md font-label-md text-on-surface-variant" for="password">Kata Sandi</label>
-                        <div class="relative group">
-                        <span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">lock</span>
-                        <input class="w-full pl-[48px] pr-md py-md bg-transparent border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all text-body-md font-body-md placeholder:text-secondary/50" id="password" name="password" placeholder="Masukkan Kata Sandi" required="" type="password"/>
-                        </div>
+                            <label class="block text-label-md font-label-md text-on-surface-variant" for="password">Kata Sandi</label>
+                            
+                            <div class="relative group">
+                                <span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">lock</span>
+                                <input class="w-full pl-[48px] pr-md py-md bg-transparent border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all text-body-md font-body-md placeholder:text-secondary/50" id="password" name="password" placeholder="Masukkan Kata Sandi" required="" type="password"/>
+                            </div>
                         </div>
 
                         <!-- Options -->
@@ -197,7 +199,7 @@
                         </div>
 
                         <!-- Submit Button -->
-                        <button class="w-full bg-primary-container text-on-primary py-md px-lg rounded-lg font-semibold text-body-lg hover:bg-primary transition-all shadow-md active:scale-[0.98] flex justify-center items-center gap-sm" type="submit">
+                        <button onclick="loginMahasiswa()" class="w-full bg-primary-container text-on-primary py-md px-lg rounded-lg font-semibold text-body-lg hover:bg-primary transition-all shadow-md active:scale-[0.98] flex justify-center items-center gap-sm" type="submit">
                             <span>Masuk</span>
                             <span class="material-symbols-outlined text-[20px]">login</span>
                         </button>
@@ -235,20 +237,23 @@
 
         <script>
                 // Simple micro-interactions
-                document.getElementById('loginForm').addEventListener('submit', function(e) {
+                document.getElementById('loginForm').addEventListener('submit', async function(e) {
+
                     e.preventDefault();
+
                     const btn = e.target.querySelector('button[type="submit"]');
                     const originalContent = btn.innerHTML;
-                    
-                    // Visual feedback for click
-                    btn.innerHTML = `<span class="material-symbols-outlined animate-spin">sync</span> <span>Memproses...</span>`;
-                    btn.classList.add('opacity-80', 'cursor-not-allowed');
-                    
-                    setTimeout(() => {
-                        btn.innerHTML = originalContent;
-                        btn.classList.remove('opacity-80', 'cursor-not-allowed');
-                        alert('Sistem sedang melakukan validasi kredensial Anda.');
-                    }, 1500);
+
+                    btn.innerHTML =
+                        `<span class="material-symbols-outlined animate-spin">sync</span>
+                        <span>Memproses...</span>`;
+
+                    btn.disabled = true;
+
+                    await loginMahasiswa();
+
+                    btn.innerHTML = originalContent;
+                    btn.disabled = false;
                 });
 
                 // Background parallax effect
@@ -260,6 +265,34 @@
                         card.style.transform = `translate(${moveX}px, ${moveY}px)`;
                     }
                 });
+
+                async function loginMahasiswa() {
+
+                    console.log("LOGIN DIPANGGIL");
+
+                    const response = await fetch('/api/mahasiswa/login', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            nim: document.getElementById('nim').value,
+                            password: document.getElementById('password').value
+                        })
+                    });
+
+                    console.log(response.status);
+
+                    const data = await response.json();
+
+                    console.log(data);
+
+                    if(data.status){
+                        window.location.href = "/dashboard_mahasiswa";
+                    }else{
+                        alert(data.message);
+                    }
+                }
             </script>
     </body>
 </html>
