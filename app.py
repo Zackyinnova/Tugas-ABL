@@ -25,7 +25,7 @@ def index():
         "index.html"
     )
 
-#Untuk render Template / page login mahasiswa
+#Untuk render Template / page  mahasiswa
 @app.route('/login_mahasiswa')
 def render_login_mahasiswa():
     
@@ -34,21 +34,33 @@ def render_login_mahasiswa():
     )
 
 
-@app.route('/login-dosen')
-def halaman_login_dosen():
-
-    return render_template(
-        'login_dosen.html'
-    )
-
 @app.route('/dashboard_mahasiswa')
 def render_dashboard_mahasiswa():
     
     return render_template(
-        "Dashboard_Pages/Dashbord_mahasiswa.html"
+        "Dashboard_Mhs/Dashbord_mahasiswa.html"
     )
 
-#untuk render Template page login dosen
+#Untuk render Template / page  Dosen
+@app.route('/login_dosen')
+def halaman_login_dosen():
+
+    return render_template(
+        'Login_Pages/LoginPage_dsn.html'
+    )
+
+
+@app.route('/dashboard_dosen')
+def dashboard_dosen():
+
+    if session.get('role') != 'dosen':
+        return redirect('/login-dosen')
+
+    return render_template(
+        'Dashboard_dsn/Dashboard_dsn.html'
+    )
+
+
 
 
 
@@ -95,36 +107,81 @@ def login_dosen():
 
     data = request.get_json()
 
-    username = data['username']
+    nidn = data['nidn']
     password = data['password']
 
     sql = """
     SELECT *
-    FROM users
-    WHERE username=%s
+    FROM dosen
+    WHERE nidn=%s
     AND password=%s
-    AND role='dosen'
     """
 
-    cursor.execute(sql, (username, password))
-    user = cursor.fetchone()
+    cursor.execute(sql, (nidn, password))
+    dosen = cursor.fetchone()
 
-    if user:
+    if dosen:
 
-        session['user_id'] = user['id']
+        session['nidn'] = dosen['nidn']
+        session['nama'] = dosen['nama']
         session['role'] = 'dosen'
-        session['username'] = user['username']
 
         return jsonify({
             "status": True,
-            "message": "Login dosen berhasil"
+            "message": "Login dosen berhasil",
+            "nama": dosen['nama']
         })
 
     return jsonify({
         "status": False,
-        "message": "Login gagal"
+        "message": "NIDN atau password salah"
     }), 401
 
+#session data dosen
+@app.route('/api/dosen/session')
+def dosen_session():
+
+    if session.get('role') != 'dosen':
+        return jsonify({
+            "status": False,
+            "message": "Belum login"
+        }), 401
+
+    return jsonify({
+        "status": True,
+        "nidn": session['nidn'],
+        "nama": session['nama']
+    })
+
+
+#untuk ambil data dosen
+@app.route('/api/dosen/profile')
+def profile_dosen():
+
+    if session.get('role') != 'dosen':
+        return jsonify({
+            "status": False
+        }), 401
+
+    cursor.execute(
+        "SELECT * FROM dosen WHERE nidn=%s",
+        (session['nidn'],)
+    )
+
+    dosen = cursor.fetchone()
+
+    return jsonify(dosen)
+
+#logout akun dosen
+@app.route('/api/logout', methods=['POST'])
+def logout():
+
+    session.clear()
+
+    return jsonify({
+        "status": True,
+        "message": "Logout berhasil"
+    })
 
 
 if __name__ == "__main__":

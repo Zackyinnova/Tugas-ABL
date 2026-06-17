@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AcademiaTrack - Jadwal Mengajar</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        body {
+            font-family: 'Hanken Grotesk', sans-serif;
+            background-color: #f9f9ff;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 16px;
+        }
+        .schedule-card {
+            transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease;
+        }
+        .schedule-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .active-session-glow {
+            box-shadow: 0 0 0 2px #003fb1, 0 10px 25px -5px rgba(26, 86, 219, 0.3);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "error": "#ba1a1a",
+                      "on-tertiary-fixed": "#002113",
+                      "inverse-primary": "#b5c4ff",
+                      "tertiary-fixed": "#81f9c1",
+                      "on-surface": "#121c2a",
+                      "on-background": "#121c2a",
+                      "on-secondary": "#ffffff",
+                      "on-tertiary-container": "#7af3bb",
+                      "surface-container-high": "#dee9fd",
+                      "surface-container": "#e6eeff",
+                      "on-surface-variant": "#434654",
+                      "error-container": "#ffdad6",
+                      "background": "#f9f9ff",
+                      "surface-container-low": "#eff3ff",
+                      "surface": "#f9f9ff",
+                      "tertiary": "#005438",
+                      "inverse-on-surface": "#ebf1ff",
+                      "primary-fixed-dim": "#b5c4ff",
+                      "on-secondary-fixed-variant": "#444749",
+                      "secondary-container": "#dee0e2",
+                      "on-tertiary": "#ffffff",
+                      "primary-fixed": "#dbe1ff",
+                      "on-secondary-container": "#606365",
+                      "on-primary-container": "#d4dcff",
+                      "tertiary-container": "#006f4b",
+                      "on-primary-fixed-variant": "#003dab",
+                      "on-error-container": "#93000a",
+                      "surface-bright": "#f9f9ff",
+                      "primary-container": "#1a56db",
+                      "outline-variant": "#c3c5d7",
+                      "surface-variant": "#d9e3f7",
+                      "on-primary": "#ffffff",
+                      "secondary-fixed-dim": "#c5c6c8",
+                      "secondary-fixed": "#e1e2e4",
+                      "secondary": "#5c5f60",
+                      "on-secondary-fixed": "#191c1e",
+                      "on-primary-fixed": "#00174d",
+                      "on-error": "#ffffff",
+                      "surface-dim": "#d0daef",
+                      "primary": "#003fb1",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-container-highest": "#d9e3f7",
+                      "outline": "#737686",
+                      "surface-tint": "#1353d8",
+                      "inverse-surface": "#273140",
+                      "tertiary-fixed-dim": "#63dca6",
+                      "on-tertiary-fixed-variant": "#005236"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xl": "32px",
+                      "gutter": "12px",
+                      "xs": "4px",
+                      "base": "4px",
+                      "sm": "8px",
+                      "md": "16px",
+                      "container-margin": "16px",
+                      "lg": "24px"
+              },
+              "fontFamily": {
+                      "headline-sm": ["Hanken Grotesk"],
+                      "headline-md": ["Hanken Grotesk"],
+                      "body-lg": ["Hanken Grotesk"],
+                      "label-sm": ["Inter"],
+                      "display-lg": ["Hanken Grotesk"],
+                      "body-md": ["Hanken Grotesk"],
+                      "title-lg": ["Hanken Grotesk"],
+                      "label-md": ["Inter"]
+              },
+              "fontSize": {
+                      "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "label-sm": ["11px", {"lineHeight": "14px", "fontWeight": "600"}],
+                      "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "title-lg": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                      "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background selection:bg-primary-fixed">
+<!-- TopNavBar -->
+<header class="bg-surface-container-lowest dark:bg-inverse-surface border-b border-outline-variant dark:border-outline shadow-sm dark:shadow-none w-full h-16 sticky top-0 z-50">
+<div class="flex justify-between items-center w-full px-lg max-w-7xl mx-auto h-full">
+<div class="flex items-center gap-md">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-inverse-primary tracking-tight">AcademiaTrack</span>
+</div>
+<nav class="hidden md:flex items-center gap-xl">
+<a class="text-secondary dark:text-on-secondary-fixed-variant font-medium hover:text-primary transition-colors duration-200" href="#">Dashboard</a>
+<a class="text-primary dark:text-inverse-primary border-b-2 border-primary font-bold pb-1" href="#">Schedule</a>
+<a class="text-secondary dark:text-on-secondary-fixed-variant font-medium hover:text-primary transition-colors duration-200" href="#">Attendance</a>
+<a class="text-secondary dark:text-on-secondary-fixed-variant font-medium hover:text-primary transition-colors duration-200" href="#">Analytics</a>
+</nav>
+<div class="flex items-center gap-md">
+<button class="hidden md:flex items-center gap-xs px-md py-sm bg-primary-container text-on-primary-container rounded-lg font-bold cursor-pointer active:opacity-80 transition-all">
+<span class="material-symbols-outlined text-[20px]">qr_code_2</span>
+<span class="text-label-md">Generate QR</span>
+</button>
+<div class="flex items-center gap-sm">
+<button class="p-sm hover:bg-surface-variant rounded-full transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-secondary">notifications</span>
+</button>
+<button class="p-sm hover:bg-surface-variant rounded-full transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-secondary">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-variant overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a university lecturer in a modern office setting. The lighting is soft and natural, emphasizing a high-end corporate academic aesthetic. The background features a blurred bookshelf and a clean white wall, maintaining a minimalist and focused atmosphere consistent with a premium SaaS interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBExMR71-BYlKjVwbK_K3eTibAi1K086or65WbWSjXR1egLKiIN3kwollR3igeh8N5xbjUkmknj4deC-vf7k6dYKZ807anN38vlIuYEpilMIL143qN-E9GaLKv-8mHApXXETvPb9lNCJ8X2SRm7ofoBbj1qMgnpFX3d_lzfLga4sT2NN1O6Pc1pWTC5VDwMt-q2-FSUKxTzea62AwoZSmm187bTDYkkjd7Dd-Tt_NdAipgzejFr4xZo752WY4IYDsa8vWkPlaZ1_V0"/>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- SideNavBar (Hidden on Mobile, Fixed on Desktop) -->
+<aside class="hidden xl:flex flex-col h-screen w-64 fixed left-0 top-16 bg-surface-container-low dark:bg-surface-dim shadow-md py-md border-r border-outline-variant dark:border-outline">
+<div class="px-md mb-lg">
+<div class="flex items-center gap-sm p-sm bg-surface-container-lowest rounded-xl mb-md">
+<div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-on-primary font-bold">FA</div>
+<div>
+<h3 class="font-title-lg text-title-lg text-primary">Faculty Portal</h3>
+<p class="font-label-md text-label-md text-secondary">AY 2023-24</p>
+</div>
+</div>
+<button class="w-full py-md bg-primary text-on-primary rounded-lg font-bold flex items-center justify-center gap-sm active:scale-95 transition-transform">
+<span class="material-symbols-outlined">add</span>
+<span>New Session</span>
+</button>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="text-on-surface-variant hover:bg-surface-variant rounded-lg mx-2 my-1 flex items-center px-4 py-3 transition-all" href="#">
+<span class="material-symbols-outlined mr-md">dashboard</span>
+<span class="font-label-md text-label-md">Overview</span>
+</a>
+<a class="bg-primary-container text-on-primary-container rounded-lg mx-2 my-1 flex items-center px-4 py-3 font-bold" href="#">
+<span class="material-symbols-outlined mr-md">calendar_month</span>
+<span class="font-label-md text-label-md">My Classes</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-variant rounded-lg mx-2 my-1 flex items-center px-4 py-3 transition-all" href="#">
+<span class="material-symbols-outlined mr-md">qr_code_2</span>
+<span class="font-label-md text-label-md">Live Session</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-variant rounded-lg mx-2 my-1 flex items-center px-4 py-3 transition-all" href="#">
+<span class="material-symbols-outlined mr-md">group</span>
+<span class="font-label-md text-label-md">Student Records</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-variant rounded-lg mx-2 my-1 flex items-center px-4 py-3 transition-all" href="#">
+<span class="material-symbols-outlined mr-md">assessment</span>
+<span class="font-label-md text-label-md">Reports</span>
+</a>
+</nav>
+<div class="mt-auto pt-md border-t border-outline-variant mx-2">
+<a class="text-on-surface-variant hover:bg-surface-variant rounded-lg flex items-center px-4 py-3 transition-all" href="#">
+<span class="material-symbols-outlined mr-md">help</span>
+<span class="font-label-md text-label-md">Help Center</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-variant rounded-lg flex items-center px-4 py-3 transition-all text-error" href="#">
+<span class="material-symbols-outlined mr-md">logout</span>
+<span class="font-label-md text-label-md">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="xl:ml-64 p-lg max-w-7xl mx-auto">
+<!-- Header & Date Picker -->
+<section class="mb-xl flex flex-col md:flex-row md:items-end justify-between gap-lg">
+<div>
+<h1 class="font-display-lg text-display-lg text-on-background mb-base">Jadwal Mengajar</h1>
+<p class="font-body-lg text-body-lg text-secondary">Week 14: Oct 23 - Oct 29, 2023</p>
+</div>
+<div class="flex items-center bg-surface-container-lowest border border-outline-variant p-xs rounded-xl shadow-sm">
+<button class="p-sm hover:bg-surface-variant rounded-lg transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<div class="flex gap-xs px-md">
+<div class="flex flex-col items-center px-md py-xs rounded-lg bg-primary text-on-primary">
+<span class="font-label-sm text-label-sm opacity-80">Mon</span>
+<span class="font-headline-sm text-headline-sm">23</span>
+</div>
+<div class="flex flex-col items-center px-md py-xs rounded-lg hover:bg-surface-variant transition-colors cursor-pointer text-secondary">
+<span class="font-label-sm text-label-sm">Tue</span>
+<span class="font-headline-sm text-headline-sm">24</span>
+</div>
+<div class="flex flex-col items-center px-md py-xs rounded-lg hover:bg-surface-variant transition-colors cursor-pointer text-secondary">
+<span class="font-label-sm text-label-sm">Wed</span>
+<span class="font-headline-sm text-headline-sm">25</span>
+</div>
+<div class="flex flex-col items-center px-md py-xs rounded-lg hover:bg-surface-variant transition-colors cursor-pointer text-secondary">
+<span class="font-label-sm text-label-sm">Thu</span>
+<span class="font-headline-sm text-headline-sm">26</span>
+</div>
+<div class="flex flex-col items-center px-md py-xs rounded-lg hover:bg-surface-variant transition-colors cursor-pointer text-secondary">
+<span class="font-label-sm text-label-sm">Fri</span>
+<span class="font-headline-sm text-headline-sm">27</span>
+</div>
+</div>
+<button class="p-sm hover:bg-surface-variant rounded-lg transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</section>
+<!-- Active Session Bento -->
+<section class="mb-xl">
+<div class="relative overflow-hidden bg-primary-container text-on-primary-container rounded-xl p-lg md:p-xl active-session-glow border border-primary/20">
+<div class="absolute top-0 right-0 p-lg opacity-10">
+<span class="material-symbols-outlined text-[120px]" style="font-variation-settings: 'FILL' 1;">qr_code_2</span>
+</div>
+<div class="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-lg">
+<div class="space-y-sm">
+<div class="inline-flex items-center gap-xs px-sm py-xs bg-on-primary-container/10 rounded-full text-on-primary-container">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary-fixed opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary-fixed"></span>
+</span>
+<span class="font-label-md text-label-md font-bold uppercase tracking-wider">Live Session</span>
+</div>
+<h2 class="font-display-lg text-display-lg font-extrabold leading-tight">CS302: Advanced Algorithms</h2>
+<div class="flex flex-wrap gap-md">
+<div class="flex items-center gap-xs font-body-md text-body-md">
+<span class="material-symbols-outlined">schedule</span>
+<span>08:00 - 10:30 (Ongoing)</span>
+</div>
+<div class="flex items-center gap-xs font-body-md text-body-md">
+<span class="material-symbols-outlined">location_on</span>
+<span>Hall 4-B, Science Bldg</span>
+</div>
+<div class="flex items-center gap-xs font-body-md text-body-md">
+<span class="material-symbols-outlined">group</span>
+<span>142/150 Students Checked-in</span>
+</div>
+</div>
+</div>
+<button class="px-xl py-lg bg-surface-container-lowest text-primary rounded-xl font-bold flex items-center gap-md shadow-lg active:scale-95 transition-all group">
+<span class="material-symbols-outlined text-[32px]">qr_code_2</span>
+<div class="text-left">
+<p class="text-label-sm uppercase opacity-70">Action Required</p>
+<p class="text-headline-sm">Generate QR</p>
+</div>
+</button>
+</div>
+</div>
+</section>
+<!-- Weekly Grid Layout -->
+<div class="bento-grid">
+<!-- Monday Column (Current Day) -->
+<div class="col-span-12 md:col-span-6 lg:col-span-4 space-y-md">
+<div class="flex items-center justify-between px-xs">
+<h3 class="font-title-lg text-title-lg text-primary flex items-center gap-sm">
+                        Today <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+</h3>
+<span class="text-label-md text-secondary">3 Classes</span>
+</div>
+<!-- Completed Card -->
+<div class="schedule-card bg-surface-container-lowest border border-outline-variant p-md rounded-xl relative overflow-hidden opacity-75 grayscale-[0.5]">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-tertiary"></div>
+<div class="flex justify-between items-start mb-sm">
+<span class="text-label-md font-bold text-tertiary bg-tertiary-fixed/30 px-sm py-xs rounded">Completed</span>
+<span class="text-label-md text-secondary">08:00 - 09:40</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mb-xs">CS101: Intro to Programming</h4>
+<div class="flex items-center gap-md text-secondary">
+<div class="flex items-center gap-xs font-label-md">
+<span class="material-symbols-outlined text-sm">room</span> Room 202
+                        </div>
+<div class="flex items-center gap-xs font-label-md">
+<span class="material-symbols-outlined text-sm">person</span> 45/45
+                        </div>
+</div>
+</div>
+<!-- Ongoing (Shadow of Active Bento) -->
+<div class="schedule-card bg-primary/5 border-2 border-primary p-md rounded-xl relative">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></div>
+<div class="flex justify-between items-start mb-sm">
+<span class="text-label-md font-bold text-primary bg-primary-fixed/50 px-sm py-xs rounded">In Session</span>
+<span class="text-label-md text-primary font-bold">10:00 - 11:40</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-primary mb-xs">CS302: Advanced Algorithms</h4>
+<div class="flex items-center gap-md text-secondary">
+<div class="flex items-center gap-xs font-label-md">
+<span class="material-symbols-outlined text-sm">room</span> Hall 4-B
+                        </div>
+<div class="flex items-center gap-xs font-label-md">
+<span class="material-symbols-outlined text-sm">person</span> 142/150
+                        </div>
+</div>
+</div>
+<!-- Upcoming -->
+<div class="schedule-card bg-surface-container-lowest border border-outline-variant p-md rounded-xl relative">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary"></div>
+<div class="flex justify-between items-start mb-sm">
+<span class="text-label-md font-bold text-secondary bg-secondary-container/50 px-sm py-xs rounded">Upcoming</span>
+<span class="text-label-md text-secondary">13:30 - 15:10</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mb-xs">CS405: Artificial Intelligence</h4>
+<div class="flex items-center gap-md text-secondary">
+<div class="flex items-center gap-xs font-label-md">
+<span class="material-symbols-outlined text-sm">room</span> Lab C
+                        </div>
+<div class="flex items-center gap-xs font-label-md">
+<span class="material-symbols-outlined text-sm">person</span> 0/32
+                        </div>
+</div>
+</div>
+</div>
+<!-- Tuesday Column -->
+<div class="col-span-12 md:col-span-6 lg:col-span-4 space-y-md">
+<div class="flex items-center justify-between px-xs">
+<h3 class="font-title-lg text-title-lg text-on-surface">Tuesday</h3>
+<span class="text-label-md text-secondary">2 Classes</span>
+</div>
+<div class="schedule-card bg-surface-container-lowest border border-outline-variant p-md rounded-xl relative">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary-container"></div>
+<div class="flex justify-between items-start mb-sm">
+<span class="text-label-md text-secondary">09:00 - 10:40</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mb-xs">CS201: Data Structures</h4>
+<div class="flex items-center gap-md text-secondary">
+<div class="flex items-center gap-xs font-label-md">
+<span class="material-symbols-outlined text-sm">room</span> Room 105
+                        </div>
+<div class="flex items-center gap-xs font-label-md">
+<span class="material-symbols-outlined text-sm">person</span> 58
+                        </div>
+</div>
+</div>
+<div class="schedule-card bg-surface-container-lowest border border-outline-variant p-md rounded-xl relative">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary-container"></div>
+<div class="flex justify-between items-start mb-sm">
+<span class="text-label-md text-secondary">11:00 - 12:40</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mb-xs">CS201: Data Structures (Lab)</h4>
+<div class="flex items-center gap-md text-secondary">
+<div class="flex items-center gap-xs font-label-md">
+<span class="material-symbols-outlined text-sm">room</span> Lab A
+                        </div>
+<div class="flex items-center gap-xs font-label-md">
+<span class="material-symbols-outlined text-sm">person</span> 20
+                        </div>
+</div>
+</div>
+</div>
+<!-- Stats/Summary Column -->
+<div class="col-span-12 lg:col-span-4 space-y-md">
+<div class="flex items-center justify-between px-xs">
+<h3 class="font-title-lg text-title-lg text-on-surface">Weekly Summary</h3>
+<button class="text-primary font-label-md">Details</button>
+</div>
+<!-- Stats Bento Items -->
+<div class="grid grid-cols-2 gap-md">
+<div class="bg-surface-container-highest p-md rounded-xl border border-outline-variant">
+<p class="text-label-md text-secondary mb-xs">Hours Taught</p>
+<p class="text-display-lg font-extrabold text-primary">12.5</p>
+<p class="text-label-sm text-tertiary font-bold">+2.0 from last wk</p>
+</div>
+<div class="bg-surface-container-highest p-md rounded-xl border border-outline-variant">
+<p class="text-label-md text-secondary mb-xs">Avg. Attendance</p>
+<p class="text-display-lg font-extrabold text-primary">94%</p>
+<p class="text-label-sm text-tertiary font-bold">Excellent</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md">
+<h4 class="font-title-lg text-title-lg mb-md">Room Availability</h4>
+<div class="space-y-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<span class="w-8 h-8 rounded bg-surface-variant flex items-center justify-center font-bold text-xs">4B</span>
+<div>
+<p class="font-label-md">Science Hall 4-B</p>
+<p class="text-label-sm text-secondary">Your next session</p>
+</div>
+</div>
+<span class="px-sm py-xs bg-tertiary-fixed/30 text-tertiary text-label-sm rounded-full font-bold">BOOKED</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<span class="w-8 h-8 rounded bg-surface-variant flex items-center justify-center font-bold text-xs">LA</span>
+<div>
+<p class="font-label-md">Computer Lab A</p>
+<p class="text-label-sm text-secondary">Available after 14:00</p>
+</div>
+</div>
+<span class="px-sm py-xs bg-surface-variant text-secondary text-label-sm rounded-full font-bold">BUSY</span>
+</div>
+</div>
+</div>
+<div class="bg-inverse-surface text-inverse-on-surface rounded-xl p-md overflow-hidden relative">
+<div class="relative z-10">
+<h4 class="font-headline-sm text-headline-sm mb-xs">Academic Integrity</h4>
+<p class="text-body-md opacity-80 mb-md">Check recent attendance patterns for potential anomalies in CS201.</p>
+<button class="w-full py-sm bg-primary-fixed text-on-primary-fixed rounded-lg font-bold text-label-md active:scale-95 transition-transform">Run Report</button>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-10">
+<span class="material-symbols-outlined text-[100px]">verified_user</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Micro-interaction for active session -->
+<script>
+        // Simple script to simulate "live" updates or session transitions
+        document.addEventListener('DOMContentLoaded', () => {
+            const generateBtn = document.querySelector('.active-session-glow button');
+            if (generateBtn) {
+                generateBtn.addEventListener('click', () => {
+                    const originalContent = generateBtn.innerHTML;
+                    generateBtn.innerHTML = `
+                        <span class="material-symbols-outlined animate-spin text-[32px]">sync</span>
+                        <div class="text-left">
+                            <p class="text-label-sm uppercase opacity-70">Processing</p>
+                            <p class="text-headline-sm">Securing QR...</p>
+                        </div>
+                    `;
+                    generateBtn.classList.add('bg-tertiary-fixed', 'text-on-tertiary-fixed');
+                    
+                    setTimeout(() => {
+                        generateBtn.innerHTML = `
+                            <span class="material-symbols-outlined text-[32px]">check_circle</span>
+                            <div class="text-left">
+                                <p class="text-label-sm uppercase opacity-70">Success</p>
+                                <p class="text-headline-sm">QR Code Active</p>
+                            </div>
+                        `;
+                    }, 1500);
+                });
+            }
+        });
+    </script>
+</body></html>
