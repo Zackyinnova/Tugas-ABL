@@ -230,169 +230,215 @@
                             <h4 class="font-title-lg text-title-lg mb-sm">Academic Attendance Overview</h4>
                             <p class="font-body-md text-body-md text-on-surface-variant max-w-md">You're maintaining a high attendance rate this semester. Keep up the consistency to stay eligible for your finals!</p>
                         </div>
-                    <div class="grid grid-cols-3 gap-md mt-xl z-10">
-                    <div class="space-y-xs">
-                    <p class="font-label-md text-label-md text-on-surface-variant">Avg. Attendance</p>
-                    <p class="font-headline-md text-headline-md text-primary font-bold">95.8%</p>
+
+                        <div class="grid grid-cols-3 gap-md mt-xl z-10">
+                        <div class="space-y-xs">
+                        <p class="font-label-md text-label-md text-on-surface-variant">Avg. Attendance</p>
+                        <p class="font-headline-md text-headline-md text-primary font-bold">95.8%</p>
+                        </div>
+                        <div class="space-y-xs border-l border-outline-variant pl-md">
+                        <p class="font-label-md text-label-md text-on-surface-variant">Present</p>
+                        <p class="font-headline-md text-headline-md text-tertiary font-bold">42</p>
+                        </div>
+                        <div class="space-y-xs border-l border-outline-variant pl-md">
+                        <p class="font-label-md text-label-md text-on-surface-variant">Absent</p>
+                        <p class="font-headline-md text-headline-md text-error font-bold">2</p>
+                        </div>
+                        </div>
                     </div>
-                    <div class="space-y-xs border-l border-outline-variant pl-md">
-                    <p class="font-label-md text-label-md text-on-surface-variant">Present</p>
-                    <p class="font-headline-md text-headline-md text-tertiary font-bold">42</p>
+                    
+                    <!-- Quick Action Card -->
+                    <div class="md:col-span-4 bg-primary text-on-primary rounded-xl p-lg custom-card-shadow flex flex-col justify-center items-center text-center space-y-md">
+                        <div class="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-[32px]">event_available</span>
+                        </div>
+
+                        <div>
+                            <p class="font-headline-sm text-headline-sm">Next Session</p>
+                            <p class="font-body-md text-body-md opacity-80">Software Engineering starts in 15m</p>
+                        </div>
+
+                        <a class="w-full py-sm bg-white text-primary rounded-lg font-label-md text-label-md hover:bg-surface-container transition-colors" href="#">
+                                            View Details
+                        </a>
                     </div>
-                    <div class="space-y-xs border-l border-outline-variant pl-md">
-                    <p class="font-label-md text-label-md text-on-surface-variant">Absent</p>
-                    <p class="font-headline-md text-headline-md text-error font-bold">2</p>
-                    </div>
-                    </div>
-                    </div>
-                <!-- Quick Action Card -->
-                <div class="md:col-span-4 bg-primary text-on-primary rounded-xl p-lg custom-card-shadow flex flex-col justify-center items-center text-center space-y-md">
-                <div class="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center">
-                <span class="material-symbols-outlined text-[32px]">event_available</span>
-                </div>
-                <div>
-                <p class="font-headline-sm text-headline-sm">Next Session</p>
-                <p class="font-body-md text-body-md opacity-80">Software Engineering starts in 15m</p>
-                </div>
-                <a class="w-full py-sm bg-white text-primary rounded-lg font-label-md text-label-md hover:bg-surface-container transition-colors" href="#">
-                                        View Details
-                                    </a>
-                </div>
                 </div>
 
-            <!-- Schedule Section -->
-            <section class="space-y-md">
-            <div class="flex items-center justify-between">
-            <h4 class="font-headline-sm text-headline-sm">Today's Schedule</h4>
-            <a class="text-primary font-label-md text-label-md flex items-center gap-xs hover:underline" href="#">
-                                    View Full Calendar <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-            </a>
-            </div>
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-md">
-            <!-- Software Engineering Card -->
-            <div class="group bg-surface-container-lowest border border-outline-variant rounded-xl p-md custom-card-shadow relative flex flex-col gap-md transition-all hover:-translate-y-1 hover:border-primary">
-            <div class="absolute left-0 top-0 bottom-0 w-1 bg-primary rounded-l-xl"></div>
-            <div class="flex justify-between items-start">
-            <div>
-            <p class="font-label-sm text-label-sm text-primary font-bold uppercase tracking-widest mb-xs">COMP-402</p>
-            <h5 class="font-title-lg text-title-lg">Software Engineering</h5>
-            </div>
-            <span class="px-sm py-xs bg-surface-container-high rounded text-label-sm font-label-sm text-on-surface-variant">08:00 - 10:00</span>
-            </div>
-            <div class="flex flex-col gap-sm">
-            <div class="flex items-center gap-sm text-on-surface-variant">
-            <span class="material-symbols-outlined text-[18px]">meeting_room</span>
-            <span class="font-body-md text-body-md">Lab A, Building 3</span>
-            </div>
-            <div class="flex items-center gap-sm text-on-surface-variant">
-            <span class="material-symbols-outlined text-[18px]">person</span>
-            <span class="font-body-md text-body-md">Dr. Sarah Johnson</span>
-            </div>
-            </div>
-            <div class="mt-sm pt-md border-t border-outline-variant/30 flex justify-between items-center">
-            <div class="flex items-center gap-xs">
-            <span class="w-2 h-2 rounded-full bg-secondary-fixed"></span>
-            <span class="font-label-md text-label-md text-on-surface-variant">Scheduled</span>
-            </div>
-            <button class="text-primary material-symbols-outlined hover:bg-primary/10 rounded-full p-xs">more_vert</button>
-            </div>
-            </div>
-            <!-- Database Systems Card -->
-            <div class="group bg-surface-container-lowest border border-outline-variant rounded-xl p-md custom-card-shadow relative flex flex-col gap-md transition-all hover:-translate-y-1 hover:border-primary">
-            <div class="absolute left-0 top-0 bottom-0 w-1 bg-tertiary-container rounded-l-xl"></div>
-            <div class="flex justify-between items-start">
-            <div>
-            <p class="font-label-sm text-label-sm text-tertiary-container font-bold uppercase tracking-widest mb-xs">DB-301</p>
-            <h5 class="font-title-lg text-title-lg">Database Systems</h5>
-            </div>
-            <span class="px-sm py-xs bg-surface-container-high rounded text-label-sm font-label-sm text-on-surface-variant">10:30 - 12:30</span>
-            </div>
-            <div class="flex flex-col gap-sm">
-            <div class="flex items-center gap-sm text-on-surface-variant">
-            <span class="material-symbols-outlined text-[18px]">meeting_room</span>
-            <span class="font-body-md text-body-md">Room 402, Main Hall</span>
-            </div>
-            <div class="flex items-center gap-sm text-on-surface-variant">
-            <span class="material-symbols-outlined text-[18px]">person</span>
-            <span class="font-body-md text-body-md">Prof. David Lee</span>
-            </div>
-            </div>
-            <div class="mt-sm pt-md border-t border-outline-variant/30 flex justify-between items-center">
-            <div class="flex items-center gap-xs">
-            <span class="w-2 h-2 rounded-full bg-secondary-fixed"></span>
-            <span class="font-label-md text-label-md text-on-surface-variant">Upcoming</span>
-            </div>
-            <button class="text-primary material-symbols-outlined hover:bg-primary/10 rounded-full p-xs">more_vert</button>
-            </div>
-            </div>
-            <!-- Artificial Intelligence Card -->
-            <div class="group bg-surface-container-lowest border border-outline-variant rounded-xl p-md custom-card-shadow relative flex flex-col gap-md transition-all hover:-translate-y-1 hover:border-primary">
-            <div class="absolute left-0 top-0 bottom-0 w-1 bg-on-secondary-fixed-variant rounded-l-xl"></div>
-            <div class="flex justify-between items-start">
-            <div>
-            <p class="font-label-sm text-label-sm text-on-secondary-fixed-variant font-bold uppercase tracking-widest mb-xs">AI-505</p>
-            <h5 class="font-title-lg text-title-lg">Artificial Intelligence</h5>
-            </div>
-            <span class="px-sm py-xs bg-surface-container-high rounded text-label-sm font-label-sm text-on-surface-variant">14:00 - 16:00</span>
-            </div>
-            <div class="flex flex-col gap-sm">
-            <div class="flex items-center gap-sm text-on-surface-variant">
-            <span class="material-symbols-outlined text-[18px]">meeting_room</span>
-            <span class="font-body-md text-body-md">Virtual Hall B</span>
-            </div>
-            <div class="flex items-center gap-sm text-on-surface-variant">
-            <span class="material-symbols-outlined text-[18px]">person</span>
-            <span class="font-body-md text-body-md">Dr. Elena Rodriguez</span>
-            </div>
-            </div>
-            <div class="mt-sm pt-md border-t border-outline-variant/30 flex justify-between items-center">
-            <div class="flex items-center gap-xs">
-            <span class="w-2 h-2 rounded-full bg-secondary-fixed"></span>
-            <span class="font-label-md text-label-md text-on-surface-variant">Scheduled</span>
-            </div>
-            <button class="text-primary material-symbols-outlined hover:bg-primary/10 rounded-full p-xs">more_vert</button>
-            </div>
-            </div>
-            </div>
-            </section>
-            <!-- Bottom Illustration / Banner -->
-            <div class="w-full h-48 rounded-xl overflow-hidden relative bg-surface-container-highest flex items-center p-xl">
-            <div class="max-w-md z-10 space-y-sm">
-            <h6 class="font-headline-sm text-headline-sm">Final Exams Preparation</h6>
-            <p class="font-body-md text-body-md text-on-surface-variant">Your attendance is above 95%, making you eligible for priority registration for the final exam schedule. Check your email for more details.</p>
-            </div>
-            <div class="absolute right-0 top-0 h-full w-1/2 opacity-20 pointer-events-none">
-            <div class="absolute inset-0 bg-gradient-to-l from-primary-container to-transparent"></div>
-            <div class="h-full w-full flex items-center justify-center transform rotate-12 scale-150">
-            <span class="material-symbols-outlined text-[200px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
-            </div>
-            </div>
-            </div>
+                <!-- Schedule Section -->
+                <section class="space-y-md">
+
+                    <div class="flex items-center justify-between">
+                        <h4 class="font-headline-sm text-headline-sm">Today's Schedule</h4>
+                        <a class="text-primary font-label-md text-label-md flex items-center gap-xs hover:underline" href="#">
+                                                View Full Calendar <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                        </a>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-md">
+
+                        <!-- Software Engineering Card -->
+                        <div class="group bg-surface-container-lowest border border-outline-variant rounded-xl p-md custom-card-shadow relative flex flex-col gap-md transition-all hover:-translate-y-1 hover:border-primary">
+                            <div class="absolute left-0 top-0 bottom-0 w-1 bg-primary rounded-l-xl"></div>
+                            
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <p class="font-label-sm text-label-sm text-primary font-bold uppercase tracking-widest mb-xs">COMP-402</p>
+                                    <h5 class="font-title-lg text-title-lg">Software Engineering</h5>
+                                </div>
+
+                                <span class="px-sm py-xs bg-surface-container-high rounded text-label-sm font-label-sm text-on-surface-variant">08:00 - 10:00</span>
+                            </div>
+
+                            <div class="flex flex-col gap-sm">
+                                <div class="flex items-center gap-sm text-on-surface-variant">
+                                    <span class="material-symbols-outlined text-[18px]">meeting_room</span>
+                                    <span class="font-body-md text-body-md">Lab A, Building 3</span>
+                                </div>
+
+                                <div class="flex items-center gap-sm text-on-surface-variant">
+                                    <span class="material-symbols-outlined text-[18px]">person</span>
+                                    <span class="font-body-md text-body-md">Dr. Sarah Johnson</span>
+                                </div>
+                            </div>
+
+                            <div class="mt-sm pt-md border-t border-outline-variant/30 flex justify-between items-center">
+                                <div class="flex items-center gap-xs">
+                                    <span class="w-2 h-2 rounded-full bg-secondary-fixed"></span>
+                                    <span class="font-label-md text-label-md text-on-surface-variant">Scheduled</span>
+                                </div>
+
+                                <button class="text-primary material-symbols-outlined hover:bg-primary/10 rounded-full p-xs">more_vert</button>
+                            </div>
+                        </div>
+
+                        <!-- Database Systems Card -->
+                        <div class="group bg-surface-container-lowest border border-outline-variant rounded-xl p-md custom-card-shadow relative flex flex-col gap-md transition-all hover:-translate-y-1 hover:border-primary">
+                            <div class="absolute left-0 top-0 bottom-0 w-1 bg-tertiary-container rounded-l-xl"></div>
+                            
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <p class="font-label-sm text-label-sm text-tertiary-container font-bold uppercase tracking-widest mb-xs">DB-301</p>
+                                    <h5 class="font-title-lg text-title-lg">Database Systems</h5>
+                                </div>
+
+                                <span class="px-sm py-xs bg-surface-container-high rounded text-label-sm font-label-sm text-on-surface-variant">10:30 - 12:30</span>
+                            </div>
+
+                            <div class="flex flex-col gap-sm">
+                                <div class="flex items-center gap-sm text-on-surface-variant">
+                                    <span class="material-symbols-outlined text-[18px]">meeting_room</span>
+                                    <span class="font-body-md text-body-md">Room 402, Main Hall</span>
+                                </div>
+
+                                <div class="flex items-center gap-sm text-on-surface-variant">
+                                    <span class="material-symbols-outlined text-[18px]">person</span>
+                                    <span class="font-body-md text-body-md">Prof. David Lee</span>
+                                </div>
+                            </div>
+
+                            <div class="mt-sm pt-md border-t border-outline-variant/30 flex justify-between items-center">
+                                
+                                <div class="flex items-center gap-xs">
+                                    <span class="w-2 h-2 rounded-full bg-secondary-fixed"></span>
+                                    <span class="font-label-md text-label-md text-on-surface-variant">Upcoming</span>
+                                
+                                </div>
+
+                                <button class="text-primary material-symbols-outlined hover:bg-primary/10 rounded-full p-xs">more_vert</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Artificial Intelligence Card -->
+                        <div class="group bg-surface-container-lowest border border-outline-variant rounded-xl p-md custom-card-shadow relative flex flex-col gap-md transition-all hover:-translate-y-1 hover:border-primary">
+                            
+                            <div class="absolute left-0 top-0 bottom-0 w-1 bg-on-secondary-fixed-variant rounded-l-xl"></div>
+                            
+                            <div class="flex justify-between items-start">
+
+                                <div>
+                                    <p class="font-label-sm text-label-sm text-on-secondary-fixed-variant font-bold uppercase tracking-widest mb-xs">AI-505</p>
+                                    <h5 class="font-title-lg text-title-lg">Artificial Intelligence</h5>
+                                </div>
+
+                                <span class="px-sm py-xs bg-surface-container-high rounded text-label-sm font-label-sm text-on-surface-variant">14:00 - 16:00</span>
+                            </div>
+
+                            <div class="flex flex-col gap-sm">
+
+                                <div class="flex items-center gap-sm text-on-surface-variant">
+                                    <span class="material-symbols-outlined text-[18px]">meeting_room</span>
+                                    <span class="font-body-md text-body-md">Virtual Hall B</span>
+                                </div>
+
+                                <div class="flex items-center gap-sm text-on-surface-variant">
+                                    <span class="material-symbols-outlined text-[18px]">person</span>
+                                    <span class="font-body-md text-body-md">Dr. Elena Rodriguez</span>
+                                </div>
+
+                            </div>
+
+                            <div class="mt-sm pt-md border-t border-outline-variant/30 flex justify-between items-center">
+                                <div class="flex items-center gap-xs">
+                                    <span class="w-2 h-2 rounded-full bg-secondary-fixed"></span>
+                                    <span class="font-label-md text-label-md text-on-surface-variant">Scheduled</span>
+                                </div>
+                                <button class="text-primary material-symbols-outlined hover:bg-primary/10 rounded-full p-xs">more_vert</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Bottom Illustration / Banner -->
+                <div class="w-full h-48 rounded-xl overflow-hidden relative bg-surface-container-highest flex items-center p-xl">
+                    
+                    <div class="max-w-md z-10 space-y-sm">
+                        <h6 class="font-headline-sm text-headline-sm">Final Exams Preparation</h6>
+                        <p class="font-body-md text-body-md text-on-surface-variant">Your attendance is above 95%, making you eligible for priority registration for the final exam schedule. Check your email for more details.</p>
+                    </div>
+
+                    <div class="absolute right-0 top-0 h-full w-1/2 opacity-20 pointer-events-none">
+                    
+                        <div class="absolute inset-0 bg-gradient-to-l from-primary-container to-transparent">
+
+                        </div>
+                    
+                        <div class="h-full w-full flex items-center justify-center transform rotate-12 scale-150">
+                                <span class="material-symbols-outlined text-[200px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Mobile FAB -->
             <div class="md:hidden fixed bottom-container-margin right-container-margin z-50">
-            <button class="w-14 h-14 bg-primary text-on-primary rounded-xl shadow-xl flex items-center justify-center active:scale-90 transition-transform">
-            <span class="material-symbols-outlined text-[32px]">qr_code_scanner</span>
-            </button>
+                <button class="w-14 h-14 bg-primary text-on-primary rounded-xl shadow-xl flex items-center justify-center active:scale-90 transition-transform">
+                    <span class="material-symbols-outlined text-[32px]">qr_code_scanner</span>
+                </button>
             </div>
         </main>
-    <!-- Bottom Navigation for Mobile -->
-    <nav class="md:hidden fixed bottom-0 left-0 w-full bg-surface-container-low h-16 flex items-center justify-around border-t border-outline-variant z-50">
-    <a class="flex flex-col items-center justify-center gap-xs text-primary" href="#">
-    <span class="material-symbols-outlined">calendar_today</span>
-    <span class="font-label-sm text-label-sm">Jadwal</span>
-    </a>
-    <div class="w-8"></div> <!-- Spacer for FAB center point if needed, or layout balance -->
-    <a class="flex flex-col items-center justify-center gap-xs text-on-surface-variant/50" href="#">
-    <span class="material-symbols-outlined">person</span>
-    <span class="font-label-sm text-label-sm">Profil</span>
-    </a>
-    <a class="flex flex-col items-center justify-center gap-xs text-error/60" href="#">
-    <span class="material-symbols-outlined">logout</span>
-    <span class="font-label-sm text-label-sm">Keluar</span>
-    </a>
-    </nav>
+
+        <!-- Bottom Navigation for Mobile -->
+        <nav class="md:hidden fixed bottom-0 left-0 w-full bg-surface-container-low h-16 flex items-center justify-around border-t border-outline-variant z-50">
+            <a class="flex flex-col items-center justify-center gap-xs text-primary" href="#">
+                <span class="material-symbols-outlined">calendar_today</span>
+                <span class="font-label-sm text-label-sm">Jadwal</span>
+            </a>
+
+            <div class="w-8">
+                
+            </div> 
+
+            <!-- Spacer for FAB center point if needed, or layout balance -->
+            <a class="flex flex-col items-center justify-center gap-xs text-on-surface-variant/50" href="#">
+                <span class="material-symbols-outlined">person</span>
+                <span class="font-label-sm text-label-sm">Profil</span>
+            </a>
+
+            <a class="flex flex-col items-center justify-center gap-xs text-error/60" href="#">
+                <span class="material-symbols-outlined">logout</span>
+                <span class="font-label-sm text-label-sm">Keluar</span>
+            </a>
+        </nav>
     <script>
             // Simple interaction for cards
             document.querySelectorAll('.group').forEach(card => {
