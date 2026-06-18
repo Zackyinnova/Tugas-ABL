@@ -60,6 +60,16 @@ def dashboard_dosen():
         'Dashboard_dsn/Dashboard_dsn.html'
     )
 
+@app.route('/profil_dosen')
+def profil_dosen():
+
+    if session.get('role') != 'dosen':
+        return redirect('/login-dosen')
+
+    return render_template(
+        'Dashboard_dsn/Profil_dsn.html'
+    )
+
 
 
 
@@ -101,6 +111,16 @@ def login_mahasiswa():
         "message": "NIM atau password salah"
     }), 401
 
+
+
+
+
+
+
+
+
+
+# =============================== Bagian API Keperluan Data dosen ========================
 # APi untuk input / login dosen 
 @app.route('/api/dosen/login', methods=['POST'])
 def login_dosen():
@@ -155,22 +175,34 @@ def dosen_session():
 
 
 #untuk ambil data dosen
-@app.route('/api/dosen/profile')
+@app.route('/api/dosen/profile', methods=['GET'])
 def profile_dosen():
 
     if session.get('role') != 'dosen':
         return jsonify({
-            "status": False
+            "status": False,
+            "message": "Belum login"
         }), 401
 
     cursor.execute(
-        "SELECT * FROM dosen WHERE nidn=%s",
+        """
+        SELECT
+            nidn,
+            nama,
+            fakultas,
+            email
+        FROM dosen
+        WHERE nidn=%s
+        """,
         (session['nidn'],)
     )
 
     dosen = cursor.fetchone()
 
-    return jsonify(dosen)
+    return jsonify({
+        "status": True,
+        "data": dosen
+    })
 
 #logout akun dosen
 @app.route('/api/logout', methods=['POST'])

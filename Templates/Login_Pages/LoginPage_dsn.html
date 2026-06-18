@@ -294,25 +294,25 @@
 
                 async function loginDosen() {
 
-                const response = await fetch('/api/dosen/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        nidn: document.getElementById('nidn').value,
-                        password: document.getElementById('password').value
-                    })
-                });
+                    const response = await fetch('/api/dosen/login', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            nidn: document.getElementById('nidn').value,
+                            password: document.getElementById('password').value
+                        })
+                    });
 
-                const data = await response.json();
+                    const data = await response.json();
 
-                if(data.status){
-                    window.location.href = "/dashboard_dosen";
-                }else{
-                    alert(data.message);
+                    if(data.status){
+                        window.location.href = "/dashboard_dosen";
+                    }else{
+                        alert(data.message);
+                    }
                 }
-            }
         </script>
     </body>
 </html>

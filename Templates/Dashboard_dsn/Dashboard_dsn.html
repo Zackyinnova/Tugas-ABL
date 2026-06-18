@@ -127,6 +127,15 @@
                 <p class="font-label-md text-label-md text-on-surface-variant">Student Portal</p>
             </div>
 
+            <div class="flex flex-col items-center mb-xl p-md bg-surface-container-low rounded-xl border border-outline-variant/30">
+                <div class="w-16 h-16 rounded-full overflow-hidden mb-sm border-2 border-primary-container">
+                    <img class="w-full h-full object-cover" data-alt="A professional studio portrait of a senior male academic in his late 40s. He wears dark-rimmed glasses and a charcoal blazer over a crisp white shirt. The lighting is soft and corporate, set against a clean, out-of-focus university office background. The overall aesthetic is reliable, intelligent, and authoritative, matching a high-end educational software interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhAlJICJ101l4gqOxmOdv7j3AVJfMM3Nop8lHpdM7iOa7diFAJ7gl7iZ9KqeBDlztixqVM7OlIRc9dejxiLtu3b9SyRrTcU1EDjY9OqR-8JVgJN_8jCb4qCGNEC75FGSTTv65qorcg0gT9XpOKIdlvpEoXJW0n284gwAwh3CIS3veP0vv7E2FkbJr228V2iDIOkRCAdpgX7z-llQ7ATX5czQKBMPqbd8mfsfz7Zz3MjHM5t_uU0736uNWUMimtNEvJtR_NrdCkpVM">
+                </div>
+                
+                <h2 class="font-title-lg text-title-lg text-on-surface" id="nama"></h2>
+                <p class="font-label-md text-label-md text-on-surface-variant">Senior Lecturer</p>
+            </div>
+
             <nav class="flex-1 flex flex-col gap-xs">
 
                 <!-- Jadwal (Schedule) -->
@@ -136,7 +145,7 @@
                 </a>
 
                 <!-- Profil (Profile) -->
-                <a class="flex items-center gap-sm p-md transition-transform duration-200 text-on-surface-variant hover:bg-surface-container-highest rounded-lg cursor-pointer transition-all" href="#">
+                <a href="{{ url_for('profil_dosen')}}" class="flex items-center gap-sm p-md transition-transform duration-200 text-on-surface-variant hover:bg-surface-container-highest rounded-lg cursor-pointer transition-all" >
                     <span class="material-symbols-outlined" data-icon="person">person</span>
                     <span class="font-label-md text-label-md">Profil</span>
                 </a>
@@ -202,7 +211,7 @@
                 <!-- Welcome Header -->
                 <div class="flex flex-col md:flex-row md:items-end justify-between gap-md">
                     <div>
-                        <h3 class="font-display-lg text-display-lg">Welcome back, Budi</h3>
+                        <h3 class="font-display-lg text-display-lg">Welcome back, <span id="namaWelcome"></span></h3>
                         <p class="font-body-lg text-body-lg text-on-surface-variant">Monday, 14 October 2023</p>
                     </div>
 
@@ -460,6 +469,38 @@
                     searchContainer.classList.remove('ring-2', 'ring-primary', 'border-transparent');
                 });
             }
+
+            document.addEventListener('DOMContentLoaded', () => {
+
+                async function loadProfileDosen() {
+
+                    try {
+
+                        const response = await fetch('/api/dosen/profile');
+
+                        const result = await response.json();
+
+                        console.log(result);
+
+                        if (!result.status) {
+                            alert(result.message || "Gagal mengambil data");
+                            return;
+                        }
+
+                        document.getElementById('nama').textContent =
+                            result.data.nama;
+
+                        document.getElementById('namaWelcome').textContent =
+                            result.data.nama;
+
+                    } catch (error) {
+                        console.error(error);
+                    }
+                }
+
+                loadProfileDosen();
+
+            });
         </script>
     </body>
 </html>
